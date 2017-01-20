@@ -32,7 +32,8 @@ def get_cert(appname, domain, certname):
     working directory with the same name that the certificate had on the
     server.
     """
-    command = "cf files %s app/conf/live/%s/%s" % (appname, domain, certname)
+    # command = "cf files %s app/conf/live/%s/%s" % (appname, domain, certname)
+    command = "cf ssh %s -c 'cat ~/app/conf/live/%s/%s'" % (appname, domain, certname)
     print("Running: %s" % command)
     pipe = Popen(command, shell=True, stdout=PIPE)
     output = pipe.stdout.readlines()
